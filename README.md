@@ -26,7 +26,7 @@ With EtherNodeDiamond, you get a lightweight tool that stays out of your way.
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/harutosati/EtherNodeDiamond.git`
+1. Clone the repository: `git clone https://github.com/centxyz/EtherNodeDiamond.git`
 2. Install required dependencies: `pip install -r requirements.txt`
 
 ## Configuration
@@ -42,4 +42,4 @@ Contributions are welcome and appreciated. Please submit pull requests and issue
 
 ## License
 
-Released under the MIT License — see the [LICENSE](https://github.com/harutosati/EtherNodeDiamond/blob/main/LICENSE) file.
+Released under the MIT License — see the [LICENSE](https://github.com/centxyz/EtherNodeDiamond/blob/main/LICENSE) file.
