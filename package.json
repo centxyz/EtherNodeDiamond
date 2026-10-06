@@ -1,16 +1,16 @@
 {
     "name": "ethernodediamond",
     "version": "1.0.0",
-    "description": "EtherNodeDiamond - A TypeScript implementation",
+    "description": "A small TypeScript CLI for Ethereum JSON-RPC calls and node diagnostics",
     "main": "dist/index.js",
     "scripts": {
         "build": "tsc",
         "start": "node dist/index.js",
         "dev": "ts-node src/index.ts",
-        "test": "jest",
+        "test": "tsc && jest --runInBand",
         "clean": "rm -rf dist"
     },
-    "author": "harutosati",
+    "author": "centxyz",
     "license": "MIT",
     "dependencies": {
         "minimist": "^1.2.0"

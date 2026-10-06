@@ -1,45 +1,66 @@
-<!-- fallback_EtherNodeDiamond_20260901135819_83955 -->
-
 # EtherNodeDiamond
 
-EtherNodeDiamond enables secure, distributed execution of smart contracts via a blockchain-agnostic gateway platform.
+EtherNodeDiamond is a small TypeScript command-line client for checking an Ethereum-compatible JSON-RPC node and making individual JSON-RPC calls.
 
-With EtherNodeDiamond, you get a lightweight tool that stays out of your way.
+It reports the connected node's chain ID, latest block number, and client version. It does not deploy or execute smart contracts.
 
-**What you get**
+## Requirements
 
-- EtherNodeDiamond enables secure, distributed execution
-- of smart contracts via a
-- blockchain-agnostic gateway platform
-
-## Key Features
-
-- EtherNodeDiamond enables secure, distributed execution
-- of smart contracts via a
-- blockchain-agnostic gateway platform
-
-## Technology Stack
-
-- python
-- Modular architecture
-- CI-ready (GitHub Actions)
+- Node.js 18 or newer
+- Access to an Ethereum-compatible JSON-RPC endpoint
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/centxyz/EtherNodeDiamond.git`
-2. Install required dependencies: `pip install -r requirements.txt`
+```bash
+git clone https://github.com/centxyz/EtherNodeDiamond.git
+cd EtherNodeDiamond
+npm install
+npm run build
+```
 
-## Configuration
+## Run node diagnostics
 
-To configure EtherNodeDiamond, modify the settings in the configuration file. Options include:
-- **DEBUG**: Enable or disable debug mode.
-- **ALLOWED_HOSTS**: Set allowed hostnames.
-- **DATABASES**: Configure database settings.
+Pass an RPC endpoint with `--rpc` or set `ETH_RPC_URL`:
 
-## Contributing
+```bash
+npm start -- --rpc https://your-rpc-endpoint.example --verbose
+```
 
-Contributions are welcome and appreciated. Please submit pull requests and issues through the GitHub interface.
+The default endpoint is `http://127.0.0.1:8545`.
+
+## Make a JSON-RPC call
+
+Create `request.json`:
+
+```json
+{
+  "method": "eth_getBalance",
+  "params": ["0x0000000000000000000000000000000000000000", "latest"]
+}
+```
+
+Run it and optionally save the response:
+
+```bash
+npm start -- --rpc https://your-rpc-endpoint.example --input request.json --output result.json
+```
+
+## Options
+
+- `--rpc`, `-r`: Ethereum JSON-RPC endpoint
+- `--input`, `-i`: JSON file containing a `method` and optional `params` array
+- `--output`, `-o`: write the JSON result to a file
+- `--timeout`: request timeout in milliseconds (default: `10000`)
+- `--retries`: retry count after the first attempt (default: `2`)
+- `--verbose`, `-v`: print diagnostic progress to stderr
+
+## Development
+
+```bash
+npm run build
+npm test
+```
 
 ## License
 
-Released under the MIT License — see the [LICENSE](https://github.com/centxyz/EtherNodeDiamond/blob/main/LICENSE) file.
+Released under the [MIT License](https://github.com/centxyz/EtherNodeDiamond/blob/main/LICENSE).
