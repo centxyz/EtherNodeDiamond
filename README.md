@@ -1,5 +1,7 @@
 # EtherNodeDiamond
 
+[![CI](https://github.com/centxyz/EtherNodeDiamond/actions/workflows/ci.yml/badge.svg)](https://github.com/centxyz/EtherNodeDiamond/actions/workflows/ci.yml)
+
 EtherNodeDiamond is a small TypeScript command-line client for checking an Ethereum-compatible JSON-RPC node and making individual JSON-RPC calls.
 
 It reports the connected node's chain ID, latest block number, and client version. It does not deploy or execute smart contracts.
