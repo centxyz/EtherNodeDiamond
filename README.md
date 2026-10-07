@@ -1,8 +1,8 @@
-# EtherNodeDiamond
+# RPCSurveyor
 
-[![CI](https://github.com/centxyz/EtherNodeDiamond/actions/workflows/ci.yml/badge.svg)](https://github.com/centxyz/EtherNodeDiamond/actions/workflows/ci.yml)
+[![CI](https://github.com/centxyz/RPCSurveyor/actions/workflows/ci.yml/badge.svg)](https://github.com/centxyz/RPCSurveyor/actions/workflows/ci.yml)
 
-EtherNodeDiamond is a small TypeScript command-line client for checking an Ethereum-compatible JSON-RPC node and making individual JSON-RPC calls.
+RPCSurveyor is a small TypeScript command-line client for checking an Ethereum-compatible JSON-RPC node and making individual JSON-RPC calls.
 
 It reports the connected node's chain ID, latest block number, and client version. It does not deploy or execute smart contracts.
 
@@ -14,8 +14,8 @@ It reports the connected node's chain ID, latest block number, and client versio
 ## Installation
 
 ```bash
-git clone https://github.com/centxyz/EtherNodeDiamond.git
-cd EtherNodeDiamond
+git clone https://github.com/centxyz/RPCSurveyor.git
+cd RPCSurveyor
 npm install
 npm run build
 ```
@@ -65,7 +65,7 @@ npm test
 
 ## License
 
-Released under the [MIT License](https://github.com/centxyz/EtherNodeDiamond/blob/main/LICENSE).
+Released under the [MIT License](https://github.com/centxyz/RPCSurveyor/blob/main/LICENSE).
 
 ## Current limitations
 
