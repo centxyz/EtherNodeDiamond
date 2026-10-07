@@ -1,4 +1,8 @@
+const assert = require('node:assert/strict');
+const { afterEach, describe, test } = require('node:test');
 const { EtherNodeDiamond } = require('../dist/ethernodediamond');
+
+const originalFetch = global.fetch;
 
 function rpcResponse(result) {
     return Promise.resolve({
@@ -10,17 +14,16 @@ function rpcResponse(result) {
 }
 
 describe('EtherNodeDiamond', () => {
-    afterEach(() => jest.restoreAllMocks());
+    afterEach(() => { global.fetch = originalFetch; });
 
     test('runs real node diagnostics through Ethereum JSON-RPC', async () => {
-        const fetchMock = jest.spyOn(global, 'fetch')
-            .mockImplementationOnce(() => rpcResponse('0x1'))
-            .mockImplementationOnce(() => rpcResponse('0x10'))
-            .mockImplementationOnce(() => rpcResponse('TestClient/v1.0'));
+        const responses = ['0x1', '0x10', 'TestClient/v1.0'];
+        let calls = 0;
+        global.fetch = () => { calls += 1; return rpcResponse(responses.shift()); };
         const client = new EtherNodeDiamond({ rpcUrl: 'https://rpc.example', maxRetries: 0 });
         const result = await client.execute();
-        expect(result.success).toBe(true);
-        expect(result.data).toEqual({
+        assert.equal(result.success, true);
+        assert.deepEqual(result.data, {
             rpcUrl: 'https://rpc.example',
             chainId: 1,
             chainIdHex: '0x1',
@@ -28,19 +31,19 @@ describe('EtherNodeDiamond', () => {
             blockNumberHex: '0x10',
             clientVersion: 'TestClient/v1.0'
         });
-        expect(fetchMock).toHaveBeenCalledTimes(3);
+        assert.equal(calls, 3);
     });
 
     test('executes an arbitrary JSON-RPC request', async () => {
-        jest.spyOn(global, 'fetch').mockImplementationOnce(() => rpcResponse('0xabc'));
+        global.fetch = () => rpcResponse('0xabc');
         const client = new EtherNodeDiamond({ rpcUrl: 'https://rpc.example', maxRetries: 0 });
         const result = await client.execute({ method: 'eth_getBalance', params: ['0x123', 'latest'] });
-        expect(result.success).toBe(true);
-        expect(result.data).toBe('0xabc');
+        assert.equal(result.success, true);
+        assert.equal(result.data, '0xabc');
     });
 
     test('returns useful JSON-RPC errors', async () => {
-        jest.spyOn(global, 'fetch').mockResolvedValue({
+        global.fetch = async () => ({
             ok: true,
             status: 200,
             statusText: 'OK',
@@ -48,7 +51,7 @@ describe('EtherNodeDiamond', () => {
         });
         const client = new EtherNodeDiamond({ rpcUrl: 'https://rpc.example', maxRetries: 0 });
         const result = await client.execute({ method: 'missing_method' });
-        expect(result.success).toBe(false);
-        expect(result.message).toContain('Method not found');
+        assert.equal(result.success, false);
+        assert.match(result.message, /Method not found/);
     });
 });
