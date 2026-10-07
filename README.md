@@ -66,3 +66,9 @@ npm test
 ## License
 
 Released under the [MIT License](https://github.com/centxyz/EtherNodeDiamond/blob/main/LICENSE).
+
+## Current limitations
+
+- Results reflect a single configured RPC endpoint and do not independently verify chain consensus.
+- Retries cannot make non-idempotent custom RPC methods safe.
+- The tool does not manage keys, deploy contracts, or broadcast signed transactions.
